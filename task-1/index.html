@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Guess the correct color</h1>
+    <h1 data-testid="gameInstructions">Guess the correct color</h1>
     <div id="card">
-        <div id="colorBox"></div>
-        <div id="display">
-            <div id="scoreTrack"></div>
-            <button id="reset">Reset</button>
+        <div id="colorBox" data-testid="colorBox"></div>
+        <div id="display" data-testid="gameStatus">
+            <div id="scoreTrack" data-testid="gameStatus"></div>
+            <button id="reset" data-testid="newGameButton">Reset</button>
         </div>
         <div id="btnCard"></div>
     </div>

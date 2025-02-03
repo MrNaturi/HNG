@@ -48,6 +48,7 @@ colors.forEach((_, index) => {
     const button = document.createElement('button');
     button.className = 'selectors';
     button.style.backgroundColor = colors[index];
+    button.setAttribute('data-testid', 'colorOption');
     button.onclick = () => { choice(index) };
     btnCard.appendChild(button);
 });
