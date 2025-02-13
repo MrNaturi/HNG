@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./../styles/TicketSelection.css";
 import Select from "react-select";
 
 const TicketSelection = ({ nextStep, numberTickets, setNumberTickets, selectedTicket, setSelectedTicket, error, setError }) => {
