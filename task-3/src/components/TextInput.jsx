@@ -68,7 +68,7 @@ const TextInput = ({ text, setText, setDetectedLang, detectedLang }) => {
   return (
     <>
       <textarea value={text} onChange={handleChange} placeholder="Type something..." />
-      <span> Detected Language: {loading ? 'Initializing...' : detectedLang}</span>
+      <span> Detected Language: {loading ? 'Initializing...' : detectedLang}</span> 
     </>
   );
 };
