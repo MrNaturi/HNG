@@ -8,6 +8,28 @@ import Translation from "./components/Translation";
  
 
 const App = () => {
+  useEffect(() => {
+    const summarizerMeta = document.createElement("meta");
+    summarizerMeta.httpEquiv = "origin-trial";
+    summarizerMeta.content = import.meta.env.VITE_SUMMARIZER_TOKEN;
+    document.head.appendChild(summarizerMeta);
+  
+    const detectorMeta = document.createElement("meta");
+    detectorMeta.httpEquiv = "origin-trial";
+    detectorMeta.content = import.meta.env.VITE_DETECTOR_TOKEN;
+    document.head.appendChild(detectorMeta);
+  
+    const translatorMeta = document.createElement("meta");
+    translatorMeta.httpEquiv = "origin-trial";
+    translatorMeta.content = import.meta.env.VITE_TRANSLATOR_TOKEN;
+    document.head.appendChild(translatorMeta);
+  
+    return () => {
+      document.head.removeChild(summarizerMeta); 
+      document.head.removeChild(detectorMeta); 
+      document.head.removeChild(translatorMeta); 
+    };
+  }, []);
  
   const [text, setText] = useState('');
   const [detectedLang, setDetectedLang] = useState('');
