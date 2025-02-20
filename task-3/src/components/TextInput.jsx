@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const TextInput = ({ text, setText, setDetectedLang, detectedLang, setRawLang,setMessages}) => {
+const TextInput = ({ text, setText, setDetectedLang, detectedLang, setRawLang,setMessages,setError}) => {
   const [detector, setDetector] = useState(null);
   const [loading, setLoading] = useState(true); 
   const[detectedText, setDetectedText]= useState("")
@@ -43,6 +43,7 @@ const TextInput = ({ text, setText, setDetectedLang, detectedLang, setRawLang,se
   const handleChange = async (e) => {
     const newText = e.target.value;
     setDetectedText(newText)
+    setError(null)
 
     if (!detector || loading) {
       setDetectedLang('Detecting language...');
@@ -64,7 +65,7 @@ const TextInput = ({ text, setText, setDetectedLang, detectedLang, setRawLang,se
       }
     } catch (error) {
       console.error('Language detection failed:', error);
-      setDetectedLang('Error detecting language');
+      setError('Failed to detect language. Please try again.');
     }
   };
 

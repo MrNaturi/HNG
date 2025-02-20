@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const SummarizeButton = ({ text, summarizedText, setSummarizedText,setMessages }) => {
+const SummarizeButton = ({ text, summarizedText, setSummarizedText,setMessages,setError }) => {
     const [summarizer, setSummarizer] = useState(null);
     const [loading, setLoading] = useState(false);
 
@@ -47,6 +47,7 @@ const SummarizeButton = ({ text, summarizedText, setSummarizedText,setMessages }
     const handleSummarize = async () => {
         if (loading) return; 
         setLoading(true);
+        setError(null)
 
         try {
             let summarizerInstance = summarizer;
@@ -66,10 +67,11 @@ const SummarizeButton = ({ text, summarizedText, setSummarizedText,setMessages }
                     { type: 'bot', text: summary}
                 ]);
             } else {
-                console.error("Summarizer still not available after initialization.");
+                throw new Error("Summarizer failed to initialize.");
             }
         } catch (error) {
             console.error("Summarization failed:", error);
+            setError("Failed to summarize text. Please try again.");
         }
 
         setLoading(false);

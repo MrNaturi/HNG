@@ -1,10 +1,11 @@
 import React, { useState,useEffect } from 'react'
 
 
-const Translation = ({text, translatedText, rawLang,setTranslatedText, setMessages}) => {
+const Translation = ({text, translatedText, rawLang,setTranslatedText, setMessages, setError}) => {
     const [transLang, setTransLang] = useState("en")
     const handleTranslate = async(e) =>{
         e.preventDefault()
+        setError(null);
         if ('ai' in self && 'translator' in self.ai) {
             console.log('Translation API is available');
       
@@ -36,6 +37,7 @@ const Translation = ({text, translatedText, rawLang,setTranslatedText, setMessag
             ]);
             } catch (error) {
               console.error('Translation failed:', error);
+              setError('Translation failed. Please try again.');
             }
           }
         };
