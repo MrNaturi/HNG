@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-const TextInput = ({ text, setText, setDetectedLang, detectedLang, setRawLang}) => {
+const TextInput = ({ text, setText, setDetectedLang, detectedLang, setRawLang,setMessages}) => {
   const [detector, setDetector] = useState(null);
-  const [loading, setLoading] = useState(true); // Added loading state
+  const [loading, setLoading] = useState(true); 
+  const[detectedText, setDetectedText]= useState("")
 
   const languageTagToHumanReadable = (languageTag, targetLanguage) => {
     const displayNames = new Intl.DisplayNames([targetLanguage], {
@@ -41,7 +42,7 @@ const TextInput = ({ text, setText, setDetectedLang, detectedLang, setRawLang}) 
 
   const handleChange = async (e) => {
     const newText = e.target.value;
-    setText(newText);
+    setDetectedText(newText)
 
     if (!detector || loading) {
       setDetectedLang('Detecting language...');
@@ -67,10 +68,23 @@ const TextInput = ({ text, setText, setDetectedLang, detectedLang, setRawLang}) 
     }
   };
 
+const handleEnter = () =>{
+    if (!detectedText.trim()) return; 
+    
+    setText(detectedText);
+
+    setMessages(prev => [
+        ...prev,
+        { type: 'user', text: detectedText },
+    ]);
+
+    setDetectedText('');
+}
   return (
     <>
-      <textarea value={text} onChange={handleChange} placeholder="Type something..." />
+      <textarea value={detectedText} onChange={handleChange} placeholder="Type something..." />
       <span> Detected Language: {loading ? 'Initializing...' : detectedLang}</span> 
+      <button onClick={handleEnter}>Send</button>
     </>
   );
 };

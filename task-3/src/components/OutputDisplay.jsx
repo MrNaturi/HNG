@@ -1,9 +1,15 @@
 import React from 'react'
 
-const OutputDisplay = ({summarizedText}) => {
+const OutputDisplay = ({messages}) => {
   return (
    <>
-   {summarizedText}
+   <div className="messages">
+                {messages.map((msg, index) => (
+                    <div key={index} className={`message ${msg.type}`}>
+                        {msg.text}
+                    </div>
+                ))}
+            </div>
    </>
   )
 }

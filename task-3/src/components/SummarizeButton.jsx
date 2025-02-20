@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const SummarizeButton = ({ text, summarizedText, setSummarizedText }) => {
+const SummarizeButton = ({ text, summarizedText, setSummarizedText,setMessages }) => {
     const [summarizer, setSummarizer] = useState(null);
     const [loading, setLoading] = useState(false);
 
@@ -56,17 +56,15 @@ const SummarizeButton = ({ text, summarizedText, setSummarizedText }) => {
                 summarizerInstance = await initializeSummarizer();
                 setSummarizer(summarizerInstance); // Store it in state
             }
-            if (!summarizer.ready) {
-                console.warn("Summarizer is not fully ready. Waiting...");
-                await summarizer.ready;
-            }
+            
             if (summarizerInstance) {
                 console.log("Starting summarization for text:", text);
-                const summary = await summarizerInstance.summarize(text, {
-                    context: 'This article is intended for a tech-savvy audience.',
-                });
+                const summary = await summarizerInstance.summarize(text);
                 setSummarizedText(summary);
-                console.log("Summarization completed:", summary);
+                setMessages(prev => [
+                    ...prev,
+                    { type: 'bot', text: summary}
+                ]);
             } else {
                 console.error("Summarizer still not available after initialization.");
             }

@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react'
 
 
-const Translation = ({text, translatedText, rawLang,setTranslatedText}) => {
+const Translation = ({text, translatedText, rawLang,setTranslatedText, setMessages}) => {
     const [transLang, setTransLang] = useState("en")
     const handleTranslate = async(e) =>{
         e.preventDefault()
@@ -27,8 +27,13 @@ const Translation = ({text, translatedText, rawLang,setTranslatedText}) => {
                 },
               });
       
-              const translated = await translator.translate(text || 'Where is the next bus stop, please?');
-              setTranslatedText(translated); // Update parent state if needed
+              const translated = await translator.translate(text);
+              setTranslatedText(translated); 
+
+              setMessages(prev => [
+                ...prev,
+                { type: 'bot', text: translated }
+            ]);
             } catch (error) {
               console.error('Translation failed:', error);
             }
@@ -50,9 +55,6 @@ const Translation = ({text, translatedText, rawLang,setTranslatedText}) => {
             </select>
             <button onClick={handleTranslate} disabled={rawLang === transLang}>Translate</button>
           </form>
-    
-          <h3>Translated Text:</h3>
-          <p>{translatedText || "Translation will appear here..."}</p>
         </>
       );
     };

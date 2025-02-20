@@ -14,21 +14,22 @@ const App = () => {
   const [rawLang, setRawLang] = useState('en');
   const [summarizedText, setSummarizedText] = useState('');
   const [translatedText, setTranslatedText] = useState('')
-
+  const [messages, setMessages] = useState([]);
 
   return (
     <div className="chat-container">
-      <OutputDisplay summarizedText={summarizedText} />
-     <TextInput text={text} setText={setText} detectedLang={detectedLang} setDetectedLang={setDetectedLang} setRawLang={setRawLang}/>
+      <OutputDisplay summarizedText={summarizedText} translatedText={translatedText}  messages={messages} />
+     <TextInput text={text} setText={setText} detectedLang={detectedLang} setDetectedLang={setDetectedLang} setRawLang={setRawLang} setMessages={setMessages}/>
      {text.length >= 150 && detectedLang === " English" && (
   <SummarizeButton 
     text={text} 
     summarizedText={summarizedText} 
-    setSummarizedText={setSummarizedText} 
+    setSummarizedText={setSummarizedText}
+    setMessages={setMessages}
   />
 
 )}
-  <Translation text={text} translatedText={translatedText} setTranslatedText={setTranslatedText} rawLang={rawLang}/>
+  <Translation text={text} translatedText={translatedText} setTranslatedText={setTranslatedText} rawLang={rawLang} setMessages={setMessages}/>
     </div>
   );
 };
