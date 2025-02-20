@@ -45,19 +45,21 @@ const Translation = ({text, translatedText, rawLang,setTranslatedText, setMessag
     
       return (
         <>
-          <form>
+        <form className="translation-form">
             <label>Select Language:</label>
             <select value={transLang} onChange={(e) => setTransLang(e.target.value)}>
-              <option value="en">English</option>
-              <option value="pt">Portuguese</option>
-              <option value="es">Spanish</option>
-              <option value="ru">Russian</option>
-              <option value="tr">Turkish</option>
-              <option value="fr">French</option>
+                <option value="en">English</option>
+                <option value="pt">Portuguese</option>
+                <option value="es">Spanish</option>
+                <option value="ru">Russian</option>
+                <option value="tr">Turkish</option>
+                <option value="fr">French</option>
             </select>
-            <button onClick={handleTranslate} disabled={rawLang === transLang}>Translate</button>
-          </form>
-        </>
+            <button onClick={handleTranslate} disabled={rawLang === transLang}>
+                Translate
+            </button>
+        </form>
+    </>
       );
     };
 

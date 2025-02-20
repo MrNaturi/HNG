@@ -79,7 +79,7 @@ const SummarizeButton = ({ text, summarizedText, setSummarizedText,setMessages,s
 
     return (
         <>
-            <button onClick={handleSummarize} disabled={loading}>
+            <button onClick={handleSummarize} disabled={loading} className='summarize'>
                 {loading ? 'Summarizing...' : 'Summarize'}
             </button>
         </>
