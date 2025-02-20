@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const TextInput = ({ text, setText, setDetectedLang, detectedLang }) => {
+const TextInput = ({ text, setText, setDetectedLang, detectedLang, setRawLang}) => {
   const [detector, setDetector] = useState(null);
   const [loading, setLoading] = useState(true); // Added loading state
 
@@ -57,6 +57,8 @@ const TextInput = ({ text, setText, setDetectedLang, detectedLang }) => {
 
       if (results.length > 0) {
         const { detectedLanguage } = results[0];
+        setRawLang(detectedLanguage)
+        
         setDetectedLang(` ${languageTagToHumanReadable(detectedLanguage, 'en')}`);
       }
     } catch (error) {
